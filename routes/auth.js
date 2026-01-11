@@ -7,6 +7,12 @@ const router = express.Router();
 
 // Register
 router.post("/register", async (req, res) => {
+  
+  const existingUser = await User.findOne({ username: req.body.username });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already exists" });
+    }
+
   const hash = await bcrypt.hash(req.body.password, 10);
   const user = await User.create({
     username: req.body.username,
