@@ -30,8 +30,8 @@ router.post("/login", async (req, res) => {
 
   res.json({
     token,
-    level: user.level,
-    score: user.score
+    level: user.maxLevel,
+    score: user.bestScore
   });
 });
 
